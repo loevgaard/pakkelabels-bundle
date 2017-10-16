@@ -1,0 +1,6 @@
+services:
+    loevgaard_pakkelabels.client:
+        class: Loevgaard\Pakkelabels\Client
+        arguments:
+            - "%loevgaard_pakkelabels.api_username%"
+            - "%loevgaard_pakkelabels.api_password%"

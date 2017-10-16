@@ -12,7 +12,13 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^7.1",
-        "loevgaard/pakkelabels-php-sdk": "^1.0@dev"
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/orm": "^2.5",
+        "league/iso3166": "^2.0",
+        "loevgaard/pakkelabels-php-sdk": "^1.0@dev",
+        "symfony/framework-bundle": "^3.2",
+        "symfony/workflow": "^3.2",
+        "symfony/yaml": "^3.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",

@@ -23,7 +23,6 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                 ->end()
             ->end()
-            ->fixXmlConfig('altapay_ip')
         ;
 
         return $treeBuilder;
