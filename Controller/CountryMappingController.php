@@ -151,7 +151,7 @@ class CountryMappingController extends Controller
     {
         return $this->render('@LoevgaardPakkelabels/country_mapping/edit.html.twig', [
             'countryMapping' => $countryMapping,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
