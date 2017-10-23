@@ -18,7 +18,7 @@
             <td>{{ label.orderId }}</td>
             <td>{{ label.receiverName }}</td>
             <td nowrap>
-                <a class="btn btn-sm btn-default" href="{{ path('loevgaard_pakkelabels_label_show', {id: countryMapping.id}) }}"><span class="glyphicon glyphicon-eye-open"></span> {{ 'layout.show'|trans }}</a>
+                <a class="btn btn-sm btn-default" href="{{ path('loevgaard_pakkelabels_label_show', {id: label.id}) }}"><span class="glyphicon glyphicon-eye-open"></span> {{ 'layout.show'|trans }}</a>
             </td>
         </tr>
         {% endfor %}

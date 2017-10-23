@@ -34,7 +34,7 @@ class Label
      *
      * @var int
      *
-     * @ORM\Column(type="integer", unique=true)
+     * @ORM\Column(type="integer", unique=true, nullable=true)
      */
     protected $externalId;
 
@@ -202,14 +202,14 @@ class Label
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $senderTelephone;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $senderMobile;
 
@@ -272,14 +272,14 @@ class Label
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $receiverTelephone;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $receiverMobile;
 
@@ -391,7 +391,7 @@ class Label
     /**
      * @return int
      */
-    public function getExternalId(): int
+    public function getExternalId(): ?int
     {
         return $this->externalId;
     }
@@ -431,7 +431,7 @@ class Label
     /**
      * @return string
      */
-    public function getError(): string
+    public function getError(): ?string
     {
         return $this->error;
     }
@@ -451,7 +451,7 @@ class Label
     /**
      * @return string
      */
-    public function getShippingMethod(): string
+    public function getShippingMethod(): ?string
     {
         return $this->shippingMethod;
     }
@@ -471,7 +471,7 @@ class Label
     /**
      * @return string
      */
-    public function getOrderId(): string
+    public function getOrderId(): ?string
     {
         return $this->orderId;
     }
@@ -491,7 +491,7 @@ class Label
     /**
      * @return string
      */
-    public function getReference(): string
+    public function getReference(): ?string
     {
         return $this->reference;
     }
@@ -511,7 +511,7 @@ class Label
     /**
      * @return string
      */
-    public function getSource(): string
+    public function getSource(): ?string
     {
         return $this->source;
     }
@@ -551,7 +551,7 @@ class Label
     /**
      * @return string
      */
-    public function getLabelFormat(): string
+    public function getLabelFormat(): ?string
     {
         return $this->labelFormat;
     }
@@ -731,7 +731,7 @@ class Label
     /**
      * @return string
      */
-    public function getSenderAddress2(): string
+    public function getSenderAddress2(): ?string
     {
         return $this->senderAddress2;
     }
@@ -811,7 +811,7 @@ class Label
     /**
      * @return string
      */
-    public function getSenderAttention(): string
+    public function getSenderAttention(): ?string
     {
         return $this->senderAttention;
     }
@@ -851,7 +851,7 @@ class Label
     /**
      * @return string
      */
-    public function getSenderTelephone(): string
+    public function getSenderTelephone(): ?string
     {
         return $this->senderTelephone;
     }
@@ -871,7 +871,7 @@ class Label
     /**
      * @return string
      */
-    public function getSenderMobile(): string
+    public function getSenderMobile(): ?string
     {
         return $this->senderMobile;
     }
@@ -931,7 +931,7 @@ class Label
     /**
      * @return string
      */
-    public function getReceiverAddress2(): string
+    public function getReceiverAddress2(): ?string
     {
         return $this->receiverAddress2;
     }
@@ -1011,7 +1011,7 @@ class Label
     /**
      * @return string
      */
-    public function getReceiverAttention(): string
+    public function getReceiverAttention(): ?string
     {
         return $this->receiverAttention;
     }
@@ -1051,7 +1051,7 @@ class Label
     /**
      * @return string
      */
-    public function getReceiverTelephone(): string
+    public function getReceiverTelephone(): ?string
     {
         return $this->receiverTelephone;
     }
@@ -1071,7 +1071,7 @@ class Label
     /**
      * @return string
      */
-    public function getReceiverMobile(): string
+    public function getReceiverMobile(): ?string
     {
         return $this->receiverMobile;
     }
@@ -1091,7 +1091,7 @@ class Label
     /**
      * @return string
      */
-    public function getReceiverInstruction(): string
+    public function getReceiverInstruction(): ?string
     {
         return $this->receiverInstruction;
     }

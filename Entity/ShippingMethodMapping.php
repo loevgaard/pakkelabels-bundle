@@ -45,7 +45,7 @@ class ShippingMethodMapping
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -65,7 +65,7 @@ class ShippingMethodMapping
     /**
      * @return string
      */
-    public function getSource(): string
+    public function getSource(): ?string
     {
         return $this->source;
     }
@@ -85,7 +85,7 @@ class ShippingMethodMapping
     /**
      * @return string
      */
-    public function getProductCode(): string
+    public function getProductCode(): ?string
     {
         return $this->productCode;
     }

@@ -9,3 +9,4 @@ services:
         class: Loevgaard\PakkelabelsBundle\File\LabelFileFactory
         arguments:
             - "@loevgaard_pakkelabels.client"
+            - "%loevgaard_pakkelabels.label_dir%"

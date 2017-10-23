@@ -44,7 +44,7 @@ class CountryMapping
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -64,7 +64,7 @@ class CountryMapping
     /**
      * @return string
      */
-    public function getSource(): string
+    public function getSource(): ?string
     {
         return $this->source;
     }
@@ -84,7 +84,7 @@ class CountryMapping
     /**
      * @return string
      */
-    public function getCountryCode(): string
+    public function getCountryCode(): ?string
     {
         return $this->countryCode;
     }
