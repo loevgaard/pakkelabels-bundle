@@ -12,9 +12,15 @@ class CountryMappingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('source')
-            ->add('countryCode')
-            ->add('save', SubmitType::class)
+            ->add('source', null, [
+                'label' => 'country_mapping.label.source'
+            ])
+            ->add('countryCode', null, [
+                'label' => 'country_mapping.label.country_code'
+            ])
+            ->add('save', SubmitType::class, [
+                'label' => 'layout.save'
+            ])
         ;
     }
 

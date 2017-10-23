@@ -6,4 +6,6 @@
     <h1>{{ 'country_mapping.new.heading'|trans }}</h1>
 {% endif %}
 
-{{ form_start() }}
+{{ form_start(form) }}
+    {{ form_rest(form) }}
+{{ form_end(form) }}
