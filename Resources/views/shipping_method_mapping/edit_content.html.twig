@@ -1,0 +1,11 @@
+{% trans_default_domain 'LoevgaardPakkelabelsBundle' %}
+
+{% if shippingMethodMapping.id %}
+    <h1>{{ 'shipping_method_mapping.edit.heading'|trans }}</h1>
+{% else %}
+    <h1>{{ 'shipping_method_mapping.new.heading'|trans }}</h1>
+{% endif %}
+
+{{ form_start(form) }}
+    {{ form_rest(form) }}
+{{ form_end(form) }}

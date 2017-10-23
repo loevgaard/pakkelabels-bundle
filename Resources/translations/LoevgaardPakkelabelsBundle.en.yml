@@ -4,8 +4,10 @@ label:
         id: Id
         order_id: Order id
         receiver_name: Receiver name
+        show_label: Show label
     show:
         heading: Label
+
 country_mapping:
     label:
         source: Source
@@ -24,6 +26,27 @@ country_mapping:
     edit:
         heading: Edit country mapping
         updated: The country mapping has been updated
+
+shipping_method_mapping:
+    label:
+        source: Source
+        product_code: Product code
+        service_codes: Service codes
+    show:
+        heading: Shipping method mapping
+    index:
+        heading: Shipping method mappings
+        id: Id
+        source: Source
+        maps_to: maps to
+        product_code: Product code
+        service_codes: Service codes
+    new:
+        heading: New shipping method mapping
+        created: The shipping method mapping has been created
+    edit:
+        heading: Edit shipping method mapping
+        updated: The shipping method mapping has been updated
 
 # Global strings
 layout:

@@ -3,12 +3,15 @@
 namespace Loevgaard\PakkelabelsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * This entity maps any (shipping method) string to a product code and optional service codes.
  *
  * @ORM\Entity
  * @ORM\Table(name="pakkelabels_shipping_method_mapping")
+ * @UniqueEntity("source")
  */
 class ShippingMethodMapping
 {
@@ -24,12 +27,16 @@ class ShippingMethodMapping
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string", unique=true)
      */
     protected $source;
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(type="string")
      */

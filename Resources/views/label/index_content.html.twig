@@ -19,6 +19,7 @@
             <td>{{ label.receiverName }}</td>
             <td nowrap>
                 <a class="btn btn-sm btn-default" href="{{ path('loevgaard_pakkelabels_label_show', {id: label.id}) }}"><span class="glyphicon glyphicon-eye-open"></span> {{ 'layout.show'|trans }}</a>
+                <a class="btn btn-sm btn-default" href="{{ path('loevgaard_pakkelabels_label_image', {id: label.id}) }}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> {{ 'label.index.show_label'|trans }}</a>
             </td>
         </tr>
         {% endfor %}
