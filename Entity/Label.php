@@ -30,6 +30,15 @@ class Label
     protected $id;
 
     /**
+     * This is the shipment id from Pakkelabels
+     *
+     * @var int
+     *
+     * @ORM\Column(type="integer", unique=true)
+     */
+    protected $externalId;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string")
@@ -373,6 +382,24 @@ class Label
     public function setId(int $id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExternalId(): int
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * @param int $externalId
+     * @return Label
+     */
+    public function setExternalId(int $externalId)
+    {
+        $this->externalId = $externalId;
         return $this;
     }
 

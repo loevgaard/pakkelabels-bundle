@@ -1,8 +1,9 @@
 <?php
 
-namespace Loevgaard\DandomainAltapayBundle\Controller;
+namespace Loevgaard\PakkelabelsBundle\Controller;
 
-use Loevgaard\DandomainAltapayBundle\Form\CountryMappingType;
+use Doctrine\ORM\EntityManager;
+use Loevgaard\PakkelabelsBundle\Form\CountryMappingType;
 use Loevgaard\PakkelabelsBundle\Entity\CountryMapping;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -27,11 +28,23 @@ class CountryMappingController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $paginator  = $this->get('knp_paginator');
+
+        /** @var EntityManager $em */
+        $em = $this->get('doctrine')->getManager();
+
+        $qb = $em->createQueryBuilder();
+        $qb->select('c')
+            ->from('LoevgaardPakkelabelsBundle:CountryMapping', 'c')
+            ->orderBy('c.source')
+        ;
+
         /** @var CountryMapping[] $countryMappings */
-        $countryMappings = $this->get('doctrine')
-            ->getManager()
-            ->getRepository('LoevgaardPakkelabelsBundle:CountryMapping')
-            ->findAll();
+        $countryMappings = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            30
+        );
 
         return $this->render('@LoevgaardPakkelabels/country_mapping/index.html.twig', [
             'countryMappings' => $countryMappings,

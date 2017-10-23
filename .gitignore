@@ -3,3 +3,8 @@
 /vendor
 /phpunit.xml
 .php_cs.cache
+
+# ignore everything else but the .gitkeep file in labels folder
+!/Resources/labels
+/Resources/labels/*
+!/Resources/labels/.gitkeep

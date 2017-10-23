@@ -1,12 +1,14 @@
 <?php
 
-namespace Loevgaard\DandomainAltapayBundle\Command;
+namespace Loevgaard\PakkelabelsBundle\Command;
 
-use Doctrine\ORM\EntityManager;
+use Assert\Assert;
+use Doctrine\Common\Persistence\ObjectManager;
 use Loevgaard\PakkelabelsBundle\Entity\Label;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateLabelsCommand extends ContainerAwareCommand
@@ -17,6 +19,7 @@ class GenerateLabelsCommand extends ContainerAwareCommand
     {
         $this->setName('loevgaard:pakkelabels:generate-labels')
             ->setDescription('Generates labels')
+            ->addOption('limit', 'l', InputOption::VALUE_REQUIRED, 'The number of labels to normalize', 20)
         ;
     }
 
@@ -28,28 +31,59 @@ class GenerateLabelsCommand extends ContainerAwareCommand
             return 0;
         }
 
-        /** @var EntityManager $em */
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        $limit = (int)$input->getOption('limit');
+        Assert::that($limit)->integer()->greaterThan(0);
+
+        /** @var ObjectManager $manager */
+        $manager = $this->getContainer()->get('doctrine')->getManager();
 
         $pakkelabels = $this->getContainer()->get('loevgaard_pakkelabels.client');
 
         /** @var Label[] $labels */
-        $labels = $em->getRepository('LoevgaardPakkelabelsBundle:Label')->findBy([
+        $labels = $manager->getRepository('LoevgaardPakkelabelsBundle:Label')->findBy([
             'status' => Label::STATUS_PENDING_CREATION
-        ], null, 20);
+        ], null, $limit);
+
+        if($output->isVerbose()) {
+            $output->writeln('Label count: '.count($labels));
+        }
 
         foreach ($labels as $label) {
-            $res = $pakkelabels->doRequest('post', '/shipments', [
-                'json' => $label->arrayForApi()
-            ]);
+            $output->writeln('Creating label id: '.$label->getId().' with order id: '.$label->getOrderId(), OutputInterface::VERBOSITY_VERBOSE);
 
-            if(isset($res['error'])) {
-                $label->markAsError($res['error']);
-            } else {
-                $label->markAsSuccess();
+            try {
+                $res = $pakkelabels->doRequest('post', '/shipments', [
+                    'json' => $label->arrayForApi()
+                ]);
+
+                if (isset($res['error'])) {
+                    $label->markAsError($res['error']);
+                } else {
+                    $label->setExternalId($res['id']);
+
+                    // download label
+                    $labelRes = $pakkelabels->doRequest('get', '/shipments/' . $res['id'] . '/labels', [
+                        'query' => [
+                            'label_format' => 'png'
+                        ]
+                    ]);
+
+                    if (isset($labelRes['error'])) {
+                        $label->markAsError($labelRes['error']);
+                    } else {
+                        $labelFileFactory = $this->getContainer()->get('loevgaard_pakkelabels.label_file_factory');
+                        $labelFile = $labelFileFactory->create($label);
+                        $labelFile->fwrite(base64_decode($labelRes['base64']));
+                        $label->markAsSuccess();
+
+                        $output->writeln('Label was created', OutputInterface::VERBOSITY_VERBOSE);
+                    }
+                }
+            } catch (\Exception $e) {
+                $label->markAsError('An error occurred during creation of the label. The error was: '.$e->getMessage());
             }
 
-            $em->flush();
+            $manager->flush();
         }
     }
 }

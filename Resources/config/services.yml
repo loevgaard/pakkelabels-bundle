@@ -4,3 +4,8 @@ services:
         arguments:
             - "%loevgaard_pakkelabels.api_username%"
             - "%loevgaard_pakkelabels.api_password%"
+
+    loevgaard_pakkelabels.label_file_factory:
+        class: Loevgaard\PakkelabelsBundle\File\LabelFileFactory
+        arguments:
+            - "@loevgaard_pakkelabels.client"

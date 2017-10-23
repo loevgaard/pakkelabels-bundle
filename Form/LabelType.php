@@ -1,17 +1,18 @@
 <?php
 namespace Loevgaard\PakkelabelsBundle\Form;
 
-use Loevgaard\PakkelabelsBundle\Entity\CountryMapping;
+use Loevgaard\PakkelabelsBundle\Entity\Label;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CountryMappingType extends AbstractType
+class LabelType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        // @todo fix this form
+        /*$builder
             ->add('source', null, [
                 'label' => 'country_mapping.label.source'
             ])
@@ -21,13 +22,13 @@ class CountryMappingType extends AbstractType
             ->add('save', SubmitType::class, [
                 'label' => 'layout.save'
             ])
-        ;
+        ;*/
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => CountryMapping::class,
+            'data_class' => Label::class,
         ));
     }
 }

@@ -1,3 +1,11 @@
+label:
+    index:
+        heading: Labels
+        id: Id
+        order_id: Order id
+        receiver_name: Receiver name
+    show:
+        heading: Label
 country_mapping:
     label:
         source: Source

@@ -12,17 +12,19 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^7.1",
+        "beberlei/assert": "^2.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
+        "knplabs/knp-paginator-bundle": "^2.6",
         "league/iso3166": "^2.0",
         "loevgaard/pakkelabels-php-sdk": "^1.0.0",
-        "symfony/framework-bundle": "^3.2",
-        "symfony/workflow": "^3.2",
-        "symfony/yaml": "^3.2",
+        "sensio/framework-extra-bundle": "^3.0",
         "symfony/form": "^3.2",
-        "symfony/validator": "^3.2",
+        "symfony/framework-bundle": "^3.2",
         "symfony/twig-bridge": "^3.2",
-        "sensio/framework-extra-bundle": "^3.0"
+        "symfony/validator": "^3.2",
+        "symfony/workflow": "^3.2",
+        "symfony/yaml": "^3.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",

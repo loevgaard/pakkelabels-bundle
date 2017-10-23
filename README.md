@@ -34,7 +34,8 @@ class AppKernel extends Kernel
         $bundles = array(
             // ...
 
-            new Loevgaard\PakkelabelsBundle\LoevgaardPakkelabelsBundle()
+            new Loevgaard\PakkelabelsBundle\LoevgaardPakkelabelsBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 
         // ...
