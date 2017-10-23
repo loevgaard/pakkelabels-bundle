@@ -1,0 +1,3 @@
+loevgaard_pakkelabels:
+    resource: "@LoevgaardPakkelabelsBundle/Controller/"
+    type: annotation

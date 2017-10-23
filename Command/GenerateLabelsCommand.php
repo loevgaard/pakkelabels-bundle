@@ -33,6 +33,7 @@ class GenerateLabelsCommand extends ContainerAwareCommand
 
         $pakkelabels = $this->getContainer()->get('loevgaard_pakkelabels.client');
 
+        /** @var Label[] $labels */
         $labels = $em->getRepository('LoevgaardPakkelabelsBundle:Label')->findBy([
             'status' => Label::STATUS_PENDING_CREATION
         ], null, 20);

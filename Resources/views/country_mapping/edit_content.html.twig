@@ -1,0 +1,9 @@
+{% trans_default_domain 'LoevgaardPakkelabelsBundle' %}
+
+{% if countryMapping.id %}
+    <h1>{{ 'country_mapping.edit.heading'|trans }}</h1>
+{% else %}
+    <h1>{{ 'country_mapping.new.heading'|trans }}</h1>
+{% endif %}
+
+{{ form_start() }}

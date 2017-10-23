@@ -1,4 +1,21 @@
+country_mapping:
+    show:
+        heading: Country mapping
+    index:
+        heading: Country mappings
+        id: Id
+        source: Source
+        country_code: Country code
+        maps_to: maps to
+    new:
+        heading: New country mapping
+        created: The country mapping has been created
+    edit:
+        heading: Edit country mapping
+        updated: The country mapping has been updated
+
 # Global strings
 layout:
     actions: Actions
     show: Show
+    edit: Edit
