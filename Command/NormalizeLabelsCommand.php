@@ -33,17 +33,17 @@ class NormalizeLabelsCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $limit = (int)$input->getOption('limit');
+        $limit = (int) $input->getOption('limit');
         Assert::that($limit)->integer()->greaterThan(0);
 
         $manager = $this->getManager();
 
         /** @var Label[] $labels */
         $labels = $manager->getRepository('LoevgaardPakkelabelsBundle:Label')->findBy([
-            'status' => Label::STATUS_PENDING_NORMALIZATION
+            'status' => Label::STATUS_PENDING_NORMALIZATION,
         ], null, $limit);
 
-        if($output->isVerbose()) {
+        if ($output->isVerbose()) {
             $output->writeln('Label count: '.count($labels));
         }
 
@@ -57,11 +57,12 @@ class NormalizeLabelsCommand extends ContainerAwareCommand
             try {
                 $iso3166->alpha2($label->getSenderCountryCode());
                 $senderCountryValid = true;
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
 
-            if(!$senderCountryValid) {
+            if (!$senderCountryValid) {
                 $senderCountry = $this->countryMapping($label->getSenderCountryCode());
-                if($senderCountry) {
+                if ($senderCountry) {
                     $label->setSenderCountryCode($senderCountry);
                 } else {
                     $output->writeln('Sender country code `'.$label->getSenderCountryCode().'` is not a valid ISO 3166 alpha 2 country code. Create a mapping or change the country manually.', OutputInterface::VERBOSITY_VERBOSE);
@@ -75,11 +76,12 @@ class NormalizeLabelsCommand extends ContainerAwareCommand
             try {
                 $iso3166->alpha2($label->getReceiverCountryCode());
                 $receiverCountryValid = true;
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
 
-            if(!$receiverCountryValid) {
+            if (!$receiverCountryValid) {
                 $receiverCountry = $this->countryMapping($label->getReceiverCountryCode());
-                if($receiverCountry) {
+                if ($receiverCountry) {
                     $label->setReceiverCountryCode($receiverCountry);
                 } else {
                     $output->writeln('Receiver country code `'.$label->getReceiverCountryCode().'` is not a valid ISO 3166 alpha 2 country code. Create a mapping or change the country manually.', OutputInterface::VERBOSITY_VERBOSE);
@@ -90,11 +92,11 @@ class NormalizeLabelsCommand extends ContainerAwareCommand
             }
 
             // check that the shipping method is mapped
-            if($label->getShippingMethod()) {
+            if ($label->getShippingMethod()) {
                 $shippingMethodMapping = $this->shippingMethodMapping($label->getShippingMethod());
-                if($shippingMethodMapping) {
+                if ($shippingMethodMapping) {
                     $label->setProductCode($shippingMethodMapping->getProductCode());
-                    if(!empty($shippingMethodMapping->getServiceCodes())) {
+                    if (!empty($shippingMethodMapping->getServiceCodes())) {
                         $label->setServiceCodes(join(',', $shippingMethodMapping->getServiceCodes()));
                     }
                 } else {
@@ -115,16 +117,17 @@ class NormalizeLabelsCommand extends ContainerAwareCommand
 
     /**
      * @param string $country
+     *
      * @return null|string
      */
     protected function countryMapping(string $country)
     {
         $manager = $this->getManager();
         $countryMapping = $manager->getRepository('LoevgaardPakkelabelsBundle:CountryMapping')->findOneBy([
-            'source' => $country
+            'source' => $country,
         ]);
 
-        if($countryMapping && $countryMapping->getCountryCode()) {
+        if ($countryMapping && $countryMapping->getCountryCode()) {
             return $countryMapping->getCountryCode();
         }
 
@@ -133,16 +136,17 @@ class NormalizeLabelsCommand extends ContainerAwareCommand
 
     /**
      * @param string $shippingMethod
+     *
      * @return ShippingMethodMapping|null
      */
     protected function shippingMethodMapping(string $shippingMethod)
     {
         $manager = $this->getManager();
         $shippingMethodMapping = $manager->getRepository('LoevgaardPakkelabelsBundle:ShippingMethodMapping')->findOneBy([
-            'source' => $shippingMethod
+            'source' => $shippingMethod,
         ]);
 
-        if($shippingMethodMapping && $shippingMethodMapping->getProductCode()) {
+        if ($shippingMethodMapping && $shippingMethodMapping->getProductCode()) {
             return $shippingMethodMapping;
         }
 

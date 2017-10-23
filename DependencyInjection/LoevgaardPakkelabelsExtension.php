@@ -16,6 +16,7 @@ class LoevgaardPakkelabelsExtension extends Extension
 
         $container->setParameter('loevgaard_pakkelabels.api_username', $config['api_username']);
         $container->setParameter('loevgaard_pakkelabels.api_password', $config['api_password']);
+        $container->setParameter('loevgaard_pakkelabels.label_dir', $config['label_dir']);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

@@ -31,7 +31,7 @@ class GenerateLabelsCommand extends ContainerAwareCommand
             return 0;
         }
 
-        $limit = (int)$input->getOption('limit');
+        $limit = (int) $input->getOption('limit');
         Assert::that($limit)->integer()->greaterThan(0);
 
         /** @var ObjectManager $manager */
@@ -41,10 +41,12 @@ class GenerateLabelsCommand extends ContainerAwareCommand
 
         /** @var Label[] $labels */
         $labels = $manager->getRepository('LoevgaardPakkelabelsBundle:Label')->findBy([
-            'status' => Label::STATUS_PENDING_CREATION
-        ], null, $limit);
+            'status' => Label::STATUS_PENDING_CREATION,
+        ], [
+            'id' => 'asc'
+        ], $limit);
 
-        if($output->isVerbose()) {
+        if ($output->isVerbose()) {
             $output->writeln('Label count: '.count($labels));
         }
 
@@ -53,7 +55,7 @@ class GenerateLabelsCommand extends ContainerAwareCommand
 
             try {
                 $res = $pakkelabels->doRequest('post', '/shipments', [
-                    'json' => $label->arrayForApi()
+                    'json' => $label->arrayForApi(),
                 ]);
 
                 if (isset($res['error'])) {
@@ -62,10 +64,10 @@ class GenerateLabelsCommand extends ContainerAwareCommand
                     $label->setExternalId($res['id']);
 
                     // download label
-                    $labelRes = $pakkelabels->doRequest('get', '/shipments/' . $res['id'] . '/labels', [
+                    $labelRes = $pakkelabels->doRequest('get', '/shipments/'.$res['id'].'/labels', [
                         'query' => [
-                            'label_format' => 'png'
-                        ]
+                            'label_format' => 'png',
+                        ],
                     ]);
 
                     if (isset($labelRes['error'])) {

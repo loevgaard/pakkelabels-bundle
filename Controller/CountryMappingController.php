@@ -3,8 +3,8 @@
 namespace Loevgaard\PakkelabelsBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
-use Loevgaard\PakkelabelsBundle\Form\CountryMappingType;
 use Loevgaard\PakkelabelsBundle\Entity\CountryMapping;
+use Loevgaard\PakkelabelsBundle\Form\CountryMappingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,7 +28,7 @@ class CountryMappingController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
 
         /** @var EntityManager $em */
         $em = $this->get('doctrine')->getManager();
@@ -79,7 +79,7 @@ class CountryMappingController extends Controller
         $countryMapping = new CountryMapping();
         $form = $this->getForm($countryMapping);
         $res = $this->handleUpdate($form, $countryMapping, $request);
-        if($res) {
+        if ($res) {
             return $res;
         }
 
@@ -91,7 +91,7 @@ class CountryMappingController extends Controller
      * @Route("/{id}/edit", name="loevgaard_pakkelabels_country_mapping_edit")
      *
      * @param CountryMapping $countryMapping
-     * @param Request $request
+     * @param Request        $request
      *
      * @return Response
      */
@@ -99,7 +99,7 @@ class CountryMappingController extends Controller
     {
         $form = $this->getForm($countryMapping);
         $res = $this->handleUpdate($form, $countryMapping, $request);
-        if($res) {
+        if ($res) {
             return $res;
         }
 
@@ -107,9 +107,10 @@ class CountryMappingController extends Controller
     }
 
     /**
-     * @param Form $form
+     * @param Form           $form
      * @param CountryMapping $countryMapping
-     * @param Request $request
+     * @param Request        $request
+     *
      * @return null|RedirectResponse
      */
     private function handleUpdate(Form $form, CountryMapping $countryMapping, Request $request)
@@ -133,7 +134,7 @@ class CountryMappingController extends Controller
             );
 
             return $this->redirectToRoute('loevgaard_pakkelabels_country_mapping_edit', [
-                'id' => $countryMapping->getId()
+                'id' => $countryMapping->getId(),
             ]);
         }
 
@@ -142,24 +143,25 @@ class CountryMappingController extends Controller
 
     /**
      * @param CountryMapping $countryMapping
-     * @param Form $form
+     * @param Form           $form
+     *
      * @return Response
      */
-    private function updateResponse(CountryMapping $countryMapping, Form $form) : Response
+    private function updateResponse(CountryMapping $countryMapping, Form $form): Response
     {
         return $this->render('@LoevgaardPakkelabels/country_mapping/edit.html.twig', [
             'countryMapping' => $countryMapping,
-            'form' => $form
+            'form' => $form,
         ]);
     }
 
     /**
      * @param CountryMapping $countryMapping
+     *
      * @return Form
      */
-    private function getForm(CountryMapping $countryMapping) : Form
+    private function getForm(CountryMapping $countryMapping): Form
     {
         return $form = $this->createForm(CountryMappingType::class, $countryMapping);
     }
-
 }

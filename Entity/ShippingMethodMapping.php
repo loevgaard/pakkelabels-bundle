@@ -5,7 +5,7 @@ namespace Loevgaard\PakkelabelsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * This entity maps any (shipping method) string to a product code and optional service codes
+ * This entity maps any (shipping method) string to a product code and optional service codes.
  *
  * @ORM\Entity
  * @ORM\Table(name="pakkelabels_shipping_method_mapping")
@@ -52,11 +52,13 @@ class ShippingMethodMapping
 
     /**
      * @param int $id
+     *
      * @return ShippingMethodMapping
      */
     public function setId(int $id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -70,11 +72,13 @@ class ShippingMethodMapping
 
     /**
      * @param string $source
+     *
      * @return ShippingMethodMapping
      */
     public function setSource(string $source)
     {
         $this->source = $source;
+
         return $this;
     }
 
@@ -88,11 +92,13 @@ class ShippingMethodMapping
 
     /**
      * @param string $productCode
+     *
      * @return ShippingMethodMapping
      */
     public function setProductCode(string $productCode)
     {
         $this->productCode = $productCode;
+
         return $this;
     }
 
@@ -106,11 +112,13 @@ class ShippingMethodMapping
 
     /**
      * @param array $serviceCodes
+     *
      * @return ShippingMethodMapping
      */
     public function setServiceCodes(array $serviceCodes)
     {
         $this->serviceCodes = $serviceCodes;
+
         return $this;
     }
 }

@@ -17,30 +17,31 @@ class LabelFileFactory
      */
     protected $pakkelabelsClient;
 
-    public function __construct(Client $client)
+    public function __construct(Client $client, string $labelDir)
     {
         $this->pakkelabelsClient = $client;
-        $this->labelDir = __DIR__.'/../Resources/labels';
+        $this->labelDir = $labelDir;
     }
 
     /**
      * @param Label $label
-     * @param bool $verifyExistence
+     * @param bool  $verifyExistence
+     *
      * @return LabelFile
      */
     public function create(Label $label, bool $verifyExistence = false)
     {
         $file = new LabelFile($this->labelDir.'/'.$label->getId().'.png', 'r+');
 
-        if($verifyExistence && !$file->isFile()) {
+        if ($verifyExistence && !$file->isFile()) {
             $labelRes = $this->pakkelabelsClient->doRequest('get', '/shipments/'.$label->getExternalId().'/labels', [
                 'query' => [
-                    'label_format' => 'png'
-                ]
+                    'label_format' => 'png',
+                ],
             ]);
 
-            if(isset($labelRes['error'])) {
-                throw new \RuntimeException('The labels for label id ' . $label->getId() . ' could not be downloaded from Pakkelabels');
+            if (isset($labelRes['error'])) {
+                throw new \RuntimeException('The labels for label id '.$label->getId().' could not be downloaded from Pakkelabels');
             }
 
             $file->fwrite(base64_decode($labelRes['base64']));

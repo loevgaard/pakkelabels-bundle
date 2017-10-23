@@ -22,6 +22,11 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
+                ->scalarNode('label_dir')
+                    ->isRequired()
+                    ->cannotBeEmpty()
+                    ->info('The directory where label files are saved')
+                ->end()
             ->end()
         ;
 

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * This entity maps any (country) string to an ISO 3166 Alpha 2 country code
+ * This entity maps any (country) string to an ISO 3166 Alpha 2 country code.
  *
  * @ORM\Entity
  * @ORM\Table(name="pakkelabels_country_mapping")
@@ -51,11 +51,13 @@ class CountryMapping
 
     /**
      * @param int $id
+     *
      * @return CountryMapping
      */
-    public function setId(int $id) : CountryMapping
+    public function setId(int $id): CountryMapping
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -69,11 +71,13 @@ class CountryMapping
 
     /**
      * @param string $source
+     *
      * @return CountryMapping
      */
-    public function setSource(string $source) : CountryMapping
+    public function setSource(string $source): CountryMapping
     {
         $this->source = $source;
+
         return $this;
     }
 
@@ -87,11 +91,13 @@ class CountryMapping
 
     /**
      * @param string $countryCode
+     *
      * @return CountryMapping
      */
-    public function setCountryCode(string $countryCode) : CountryMapping
+    public function setCountryCode(string $countryCode): CountryMapping
     {
         $this->countryCode = $countryCode;
+
         return $this;
     }
 }
