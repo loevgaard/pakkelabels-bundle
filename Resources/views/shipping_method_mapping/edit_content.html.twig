@@ -9,3 +9,25 @@
 {{ form_start(form) }}
     {{ form_rest(form) }}
 {{ form_end(form) }}
+
+<script>
+    $(function () {
+        var $country = $('#{{ form.country.vars.id }}');
+        $country.on('change', function () {
+            var country = $(this).val();
+
+            $.ajax({
+                url: '{{ path('loevgaard_pakkelabels_api_wrapper') }}',
+                data: {
+                    uri: '/products',
+                    params: {
+                        'country_code': country
+                    }
+                },
+                success: function (json) {
+                    console.log(json);
+                }
+            });
+        });
+    });
+</script>

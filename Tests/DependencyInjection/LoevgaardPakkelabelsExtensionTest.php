@@ -49,6 +49,7 @@ class LoevgaardPakkelabelsExtensionTest extends TestCase
         $yaml = <<<EOF
 api_username: username
 api_password: password
+label_dir: /label/dir
 EOF;
         $parser = new Parser();
 

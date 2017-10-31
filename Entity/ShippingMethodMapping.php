@@ -112,7 +112,7 @@ class ShippingMethodMapping
     /**
      * @return array
      */
-    public function getServiceCodes(): array
+    public function getServiceCodes(): ?array
     {
         return $this->serviceCodes;
     }

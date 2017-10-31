@@ -19,7 +19,6 @@ country_mapping:
         id: Id
         source: Source
         country_code: Country code
-        maps_to: maps to
     new:
         heading: New country mapping
         created: The country mapping has been created
@@ -38,7 +37,6 @@ shipping_method_mapping:
         heading: Shipping method mappings
         id: Id
         source: Source
-        maps_to: maps to
         product_code: Product code
         service_codes: Service codes
     new:
@@ -53,3 +51,4 @@ layout:
     show: Show
     edit: Edit
     save: Save
+    create: Create

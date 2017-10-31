@@ -2,6 +2,10 @@
 
 <h1>{{ 'country_mapping.index.heading'|trans }}</h1>
 
+<div class="actions">
+    <a href="{{ path('loevgaard_pakkelabels_country_mapping_new') }}">{{ 'layout.create'|trans }}</a>
+</div>
+
 <table class="table table-hover table-striped">
     <thead>
         <tr>
@@ -17,7 +21,7 @@
         <tr>
             <td>{{ countryMapping.id }}</td>
             <td>{{ countryMapping.source }}</td>
-            <td>{{ 'country_mapping.index.maps_to'|trans }}</td>
+            <td><span class="glyphicon glyphicon-arrow-right"></span></td>
             <td>{{ countryMapping.countryCode }}</td>
             <td nowrap>
                 <a class="btn btn-sm btn-default" href="{{ path('loevgaard_pakkelabels_country_mapping_show', {id: countryMapping.id}) }}"><span class="glyphicon glyphicon-eye-open"></span> {{ 'layout.show'|trans }}</a>

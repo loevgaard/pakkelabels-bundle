@@ -5,6 +5,7 @@ namespace Loevgaard\PakkelabelsBundle\Form;
 use Loevgaard\PakkelabelsBundle\Entity\ShippingMethodMapping;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,6 +16,10 @@ class ShippingMethodMappingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('country', CountryType::class, [
+                'label' => 'shipping_method_mapping.label.country',
+                'mapped' => false
+            ])
             ->add('source', null, [
                 'label' => 'shipping_method_mapping.label.source',
             ])

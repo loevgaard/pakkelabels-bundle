@@ -2,6 +2,10 @@
 
 <h1>{{ 'shipping_method_mapping.index.heading'|trans }}</h1>
 
+<div class="actions">
+    <a href="{{ path('loevgaard_pakkelabels_shipping_method_mapping_new') }}">{{ 'layout.create'|trans }}</a>
+</div>
+
 <table class="table table-hover table-striped">
     <thead>
         <tr>
@@ -9,6 +13,7 @@
             <th>{{ 'shipping_method_mapping.index.source'|trans }}</th>
             <th>&nbsp;</th>
             <th>{{ 'shipping_method_mapping.index.product_code'|trans }}</th>
+            <th>{{ 'shipping_method_mapping.index.service_codes'|trans }}</th>
             <th>{{ 'layout.actions'|trans }}</th>
         </tr>
     </thead>
