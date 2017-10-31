@@ -18,7 +18,10 @@ class ShippingMethodMappingType extends AbstractType
         $builder
             ->add('country', CountryType::class, [
                 'label' => 'shipping_method_mapping.label.country',
-                'mapped' => false
+                'mapped' => false,
+                'preferred_choices' => [
+                    'DK'
+                ]
             ])
             ->add('source', null, [
                 'label' => 'shipping_method_mapping.label.source',
@@ -26,8 +29,14 @@ class ShippingMethodMappingType extends AbstractType
             ->add('productCode', null, [
                 'label' => 'shipping_method_mapping.label.product_code',
             ])
-            ->add('serviceCodes', TextType::class, [
+            ->add('serviceCodes', null, [
                 'label' => 'shipping_method_mapping.label.service_codes',
+            ])
+            ->add('returnProductCode', null, [
+                'label' => 'shipping_method_mapping.label.return_product_code',
+            ])
+            ->add('returnServiceCodes', null, [
+                'label' => 'shipping_method_mapping.label.return_service_codes',
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'layout.save',
@@ -37,6 +46,23 @@ class ShippingMethodMappingType extends AbstractType
         $builder->get('serviceCodes')
             ->addModelTransformer(new CallbackTransformer(
                 function ($serviceCodesAsArray) {
+                    if(!is_array($serviceCodesAsArray)) {
+                        return '';
+                    }
+                    return join(', ', $serviceCodesAsArray);
+                },
+                function ($serviceCodesAsString) {
+                    return preg_split('/[,; ]+/i', $serviceCodesAsString, null, PREG_SPLIT_NO_EMPTY);
+                }
+            ))
+        ;
+
+        $builder->get('returnServiceCodes')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($serviceCodesAsArray) {
+                    if(!is_array($serviceCodesAsArray)) {
+                        return '';
+                    }
                     return join(', ', $serviceCodesAsArray);
                 },
                 function ($serviceCodesAsString) {
@@ -50,6 +76,7 @@ class ShippingMethodMappingType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ShippingMethodMapping::class,
+            'translation_domain' => 'LoevgaardPakkelabelsBundle'
         ]);
     }
 }

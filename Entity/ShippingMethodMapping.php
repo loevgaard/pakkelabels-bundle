@@ -50,6 +50,20 @@ class ShippingMethodMapping
     protected $serviceCodes;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $returnProductCode;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(type="array", nullable=true)
+     */
+    protected $returnServiceCodes;
+
+    /**
      * @return int
      */
     public function getId(): ?int
@@ -62,7 +76,7 @@ class ShippingMethodMapping
      *
      * @return ShippingMethodMapping
      */
-    public function setId(int $id)
+    public function setId(int $id) : self
     {
         $this->id = $id;
 
@@ -82,7 +96,7 @@ class ShippingMethodMapping
      *
      * @return ShippingMethodMapping
      */
-    public function setSource(string $source)
+    public function setSource(string $source) : self
     {
         $this->source = $source;
 
@@ -102,7 +116,7 @@ class ShippingMethodMapping
      *
      * @return ShippingMethodMapping
      */
-    public function setProductCode(string $productCode)
+    public function setProductCode(string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -122,10 +136,46 @@ class ShippingMethodMapping
      *
      * @return ShippingMethodMapping
      */
-    public function setServiceCodes(array $serviceCodes)
+    public function setServiceCodes(array $serviceCodes) : self
     {
         $this->serviceCodes = $serviceCodes;
 
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReturnProductCode(): ?string
+    {
+        return $this->returnProductCode;
+    }
+
+    /**
+     * @param string $returnProductCode
+     * @return ShippingMethodMapping
+     */
+    public function setReturnProductCode(string $returnProductCode) : self
+    {
+        $this->returnProductCode = $returnProductCode;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getReturnServiceCodes(): ?array
+    {
+        return $this->returnServiceCodes;
+    }
+
+    /**
+     * @param array $returnServiceCodes
+     * @return ShippingMethodMapping
+     */
+    public function setReturnServiceCodes(array $returnServiceCodes) : self
+    {
+        $this->returnServiceCodes = $returnServiceCodes;
         return $this;
     }
 }

@@ -6,28 +6,97 @@
     <h1>{{ 'shipping_method_mapping.new.heading'|trans }}</h1>
 {% endif %}
 
-{{ form_start(form) }}
-    {{ form_rest(form) }}
-{{ form_end(form) }}
+<div class="row">
+    <div class="col-md-7">
+        {{ form_start(form) }}
+            {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+    <div class="col-md-5">
+        <h2>{{ 'shipping_method_mapping.edit.products'|trans }}</h2>
+        <div class="products"></div>
+    </div>
+</div>
+
 
 <script>
     $(function () {
         var $country = $('#{{ form.country.vars.id }}');
+
+        updateProducts($country.val());
+
         $country.on('change', function () {
             var country = $(this).val();
 
-            $.ajax({
-                url: '{{ path('loevgaard_pakkelabels_api_wrapper') }}',
-                data: {
-                    uri: '/products',
-                    params: {
-                        'country_code': country
-                    }
-                },
-                success: function (json) {
-                    console.log(json);
-                }
-            });
+            updateProducts(country);
+        });
+
+        $('.products').on('click', '.show-services', function () {
+            var idx = $(this).data('idx');
+
+            $('.service').hide();
+            $('.service-' + idx).show();
         });
     });
+
+    function updateProducts(country) {
+        $.ajax({
+            url: '{{ path('loevgaard_pakkelabels_api_wrapper') }}',
+            data: {
+                uri: '/products',
+                params: {
+                    'country_code': country
+                }
+            },
+            success: function (products) {
+                console.log(products);
+
+                if(products.hasOwnProperty('error')) {
+                    alert('An error occurred');
+                    return;
+                }
+
+                products.sort(function(a, b) {
+                    if(a.carrier.name === b.carrier.name) {
+                        return 0;
+                    }
+
+                    if(a.carrier.name > b.carrier.name) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                });
+
+                var html = "<table class=\"table table-bordered table-hover\"><thead><tr><th>{{ 'shipping_method_mapping.edit.product_carrier'|trans }}</th><th>{{ 'shipping_method_mapping.edit.product_code'|trans }}</th><th>{{ 'shipping_method_mapping.edit.product_name'|trans }}</th></tr></thead><tbody>";
+                products.forEach(function (product, productIndex) {
+                    var requiredServices = [];
+                    product.required_services.forEach(function (requiredService) {
+                        requiredServices.push(requiredService.code);
+                    });
+                    html += '<tr>';
+                    html += '<td>' + product.carrier.name + ' <a href="javascript:void(0)" class="show-services" data-idx="' + productIndex + '">{{ "shipping_method_mapping.edit.show_services"|trans }}</a></td>';
+                    html += '<td>' + product.code + '</td>';
+                    html += '<td>' + product.name + '</td>';
+                    html += '</tr>';
+                    product.available_services.forEach(function(service) {
+                        var required = requiredServices.indexOf(service.code) >= 0;
+                        html += '<tr class="service service-' + productIndex + '" style="display:none">';
+                        html += '<td>&nbsp;</td>';
+                        html += '<td>&raquo; ' + service.code + (required ? ' ({{ "layout.required"|trans }})' : '') + '</td>';
+                        html += '<td>' + service.name + '</td>';
+                        html += '</tr>';
+                    });
+                    html += '<tr class="service service-' + productIndex + '" style="display:none">';
+                    html += '<td>&nbsp;</td>';
+                    html += '<td>&nbsp;</td>';
+                    html += '</tr>';
+                });
+
+                html += '</tbody></table>';
+
+                $('.products').html(html);
+            }
+        });
+    }
 </script>

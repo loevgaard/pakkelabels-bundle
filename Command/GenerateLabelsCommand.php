@@ -59,6 +59,7 @@ class GenerateLabelsCommand extends ContainerAwareCommand
                 ]);
 
                 if (isset($res['error'])) {
+                    $output->writeln($res['error'], OutputInterface::VERBOSITY_VERBOSE);
                     $label->markAsError($res['error']);
                 } else {
                     $label->setExternalId($res['id']);
@@ -71,17 +72,19 @@ class GenerateLabelsCommand extends ContainerAwareCommand
                     ]);
 
                     if (isset($labelRes['error'])) {
+                        $output->writeln($labelRes['error'], OutputInterface::VERBOSITY_VERBOSE);
                         $label->markAsError($labelRes['error']);
                     } else {
                         $labelFileFactory = $this->getContainer()->get('loevgaard_pakkelabels.label_file_factory');
                         $labelFile = $labelFileFactory->create($label);
-                        $labelFile->fwrite(base64_decode($labelRes['base64']));
+                        $labelFile->fwrite(base64_decode($labelRes[0]['base64']));
                         $label->markAsSuccess();
 
                         $output->writeln('Label was created', OutputInterface::VERBOSITY_VERBOSE);
                     }
                 }
             } catch (\Exception $e) {
+                $output->writeln($e->getMessage(), OutputInterface::VERBOSITY_VERBOSE);
                 $label->markAsError('An error occurred during creation of the label. The error was: '.$e->getMessage());
             }
 

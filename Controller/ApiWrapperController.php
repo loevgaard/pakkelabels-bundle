@@ -23,7 +23,7 @@ class ApiWrapperController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $uri = $request->query->getAlnum('uri');
+        $uri = $request->query->get('uri');
         $params = $request->query->get('params');
 
         $client = $this->get('loevgaard_pakkelabels.client');

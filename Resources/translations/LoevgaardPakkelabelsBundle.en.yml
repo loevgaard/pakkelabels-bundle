@@ -28,9 +28,10 @@ country_mapping:
 
 shipping_method_mapping:
     label:
+        country: Country
         source: Source
         product_code: Product code
-        service_codes: Service codes
+        service_codes: Service codes (separate with comma)
     show:
         heading: Shipping method mapping
     index:
@@ -44,6 +45,11 @@ shipping_method_mapping:
     edit:
         heading: Edit shipping method mapping
         saved: The shipping method mapping has been saved
+        show_services: Show services
+        product_code: Code
+        product_name: Name
+        products: Products
+        product_carrier: Carrier
 
 # Global strings
 layout:
@@ -52,3 +58,4 @@ layout:
     edit: Edit
     save: Save
     create: Create
+    required: Required

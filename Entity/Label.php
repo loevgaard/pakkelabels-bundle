@@ -3,6 +3,7 @@
 namespace Loevgaard\PakkelabelsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -40,6 +41,8 @@ class Label
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(type="string")
      */
@@ -90,6 +93,8 @@ class Label
     /**
      * @var bool
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="boolean")
      */
     protected $ownAgreement;
@@ -104,19 +109,21 @@ class Label
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $productCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $serviceCodes;
 
     /**
      * @var bool
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(type="boolean")
      */
@@ -125,12 +132,14 @@ class Label
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $servicePointId;
 
     /**
      * @var bool
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(type="boolean")
      */
@@ -139,6 +148,8 @@ class Label
     /**
      * @var bool
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="boolean")
      */
     protected $emailNotification;
@@ -146,12 +157,16 @@ class Label
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string")
      */
     protected $senderName;
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(type="string")
      */
@@ -167,6 +182,8 @@ class Label
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string")
      */
     protected $senderCountryCode;
@@ -174,12 +191,16 @@ class Label
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string")
      */
     protected $senderZipCode;
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(type="string")
      */
@@ -194,6 +215,8 @@ class Label
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(type="string")
      */
@@ -216,12 +239,16 @@ class Label
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string")
      */
     protected $receiverName;
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(type="string")
      */
@@ -237,6 +264,8 @@ class Label
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string")
      */
     protected $receiverCountryCode;
@@ -244,12 +273,16 @@ class Label
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string")
      */
     protected $receiverZipCode;
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(type="string")
      */
@@ -264,6 +297,8 @@ class Label
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(type="string")
      */
@@ -295,6 +330,7 @@ class Label
         $this->status = static::STATUS_PENDING_NORMALIZATION;
         $this->smsNotification = false;
         $this->emailNotification = false;
+        $this->automaticSelectServicePoint = true;
     }
 
     public function arrayForApi(): array
@@ -345,10 +381,6 @@ class Label
             ],
         ];
 
-        $data = array_filter($data, function ($elm) {
-            return !is_null($elm);
-        });
-
         return $data;
     }
 
@@ -362,6 +394,21 @@ class Label
     {
         $this->error = null;
         $this->status = static::STATUS_SUCCESS;
+    }
+
+    /**
+     * Returns the available label formats
+     *
+     * @return array
+     */
+    public static function getLabelFormats() : array
+    {
+        return [
+            self::LABEL_FORMAT_10_X_19_PDF => self::LABEL_FORMAT_10_X_19_PDF,
+            self::LABEL_FORMAT_A4_PDF => self::LABEL_FORMAT_A4_PDF,
+            self::LABEL_FORMAT_PNG => self::LABEL_FORMAT_PNG,
+            self::LABEL_FORMAT_ZPL => self::LABEL_FORMAT_ZPL,
+        ];
     }
 
     /*********************

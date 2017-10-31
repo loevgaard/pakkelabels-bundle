@@ -31,7 +31,7 @@ class LabelFileFactory
      */
     public function create(Label $label, bool $verifyExistence = false)
     {
-        $file = new LabelFile($this->labelDir.'/'.$label->getId().'.png', 'r+');
+        $file = new LabelFile($this->labelDir.'/'.$label->getId().'.png', 'w+');
 
         if ($verifyExistence && !$file->isFile()) {
             $labelRes = $this->pakkelabelsClient->doRequest('get', '/shipments/'.$label->getExternalId().'/labels', [
