@@ -5,6 +5,7 @@ namespace Loevgaard\PakkelabelsBundle\Entity;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository as DoctrineEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
@@ -55,9 +56,9 @@ abstract class EntityRepository
      * @param int $itemsPerPage
      * @param array $orderBy
      * @param QueryBuilder $qb
-     * @return array
+     * @return PaginationInterface
      */
-    public function findAllWithPaging($page = 1, $itemsPerPage = 100, array $orderBy = [], QueryBuilder $qb = null) : array
+    public function findAllWithPaging($page = 1, $itemsPerPage = 100, array $orderBy = [], QueryBuilder $qb = null) : PaginationInterface
     {
         if(!$qb) {
             $qb = $this->getQueryBuilder('e');
@@ -67,7 +68,6 @@ abstract class EntityRepository
             $qb->addOrderBy($field, $direction);
         }
 
-        /** @var array $objs */
         $objs = $this->paginator->paginate(
             $qb,
             $page,
