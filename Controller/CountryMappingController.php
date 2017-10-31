@@ -2,7 +2,6 @@
 
 namespace Loevgaard\PakkelabelsBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
 use Loevgaard\PakkelabelsBundle\Entity\CountryMapping;
 use Loevgaard\PakkelabelsBundle\Form\CountryMappingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -28,23 +27,10 @@ class CountryMappingController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $paginator = $this->get('knp_paginator');
-
-        /** @var EntityManager $em */
-        $em = $this->get('doctrine')->getManager();
-
-        $qb = $em->createQueryBuilder();
-        $qb->select('c')
-            ->from('LoevgaardPakkelabelsBundle:CountryMapping', 'c')
-            ->orderBy('c.source')
-        ;
+        $repos = $this->get('loevgaard_pakkelabels.country_mapping_repository');
 
         /** @var CountryMapping[] $countryMappings */
-        $countryMappings = $paginator->paginate(
-            $qb,
-            $request->query->getInt('page', 1),
-            30
-        );
+        $countryMappings = $repos->findAllWithPaging($request->query->getInt('page', 1));
 
         return $this->render('@LoevgaardPakkelabels/country_mapping/index.html.twig', [
             'countryMappings' => $countryMappings,

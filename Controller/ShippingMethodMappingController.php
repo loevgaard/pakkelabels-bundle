@@ -2,7 +2,6 @@
 
 namespace Loevgaard\PakkelabelsBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
 use Loevgaard\PakkelabelsBundle\Entity\ShippingMethodMapping;
 use Loevgaard\PakkelabelsBundle\Form\ShippingMethodMappingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -28,23 +27,10 @@ class ShippingMethodMappingController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $paginator = $this->get('knp_paginator');
-
-        /** @var EntityManager $em */
-        $em = $this->get('doctrine')->getManager();
-
-        $qb = $em->createQueryBuilder();
-        $qb->select('c')
-            ->from('LoevgaardPakkelabelsBundle:ShippingMethodMapping', 'c')
-            ->orderBy('c.source')
-        ;
+        $repos = $this->get('loevgaard_pakkelabels.shipping_method_mapping_repository');
 
         /** @var ShippingMethodMapping[] $shippingMethodMappings */
-        $shippingMethodMappings = $paginator->paginate(
-            $qb,
-            $request->query->getInt('page', 1),
-            30
-        );
+        $shippingMethodMappings = $repos->findAllWithPaging($request->query->getInt('page', 1));
 
         return $this->render('@LoevgaardPakkelabels/shipping_method_mapping/index.html.twig', [
             'shippingMethodMappings' => $shippingMethodMappings,
@@ -118,8 +104,6 @@ class ShippingMethodMappingController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $new = is_null($shippingMethodMapping->getId());
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($shippingMethodMapping);
             $em->flush();
@@ -128,9 +112,7 @@ class ShippingMethodMappingController extends Controller
 
             $this->addFlash(
                 'success',
-                $new ?
-                    $translator->trans('shipping_method_mapping.new.created', [], 'LoevgaardPakkelabelsBundle') :
-                    $translator->trans('shipping_method_mapping.edit.updated', [], 'LoevgaardPakkelabelsBundle')
+                $translator->trans('shipping_method_mapping.edit.saved', [], 'LoevgaardPakkelabelsBundle')
             );
 
             return $this->redirectToRoute('loevgaard_pakkelabels_shipping_method_mapping_edit', [

@@ -10,3 +10,25 @@ services:
         arguments:
             - "@loevgaard_pakkelabels.client"
             - "%loevgaard_pakkelabels.label_dir%"
+
+    # Repositories
+    loevgaard_pakkelabels.shipping_method_mapping_repository:
+        class: Loevgaard\PakkelabelsBundle\Entity\ShippingMethodMappingRepository
+        arguments:
+            - "@doctrine"
+            - "@knp_paginator"
+            - Loevgaard\PakkelabelsBundle\Entity\ShippingMethodMapping
+
+    loevgaard_pakkelabels.country_mapping_repository:
+        class: Loevgaard\PakkelabelsBundle\Entity\CountryMappingRepository
+        arguments:
+            - "@doctrine"
+            - "@knp_paginator"
+            - Loevgaard\PakkelabelsBundle\Entity\CountryMapping
+
+    loevgaard_pakkelabels.label_repository:
+        class: Loevgaard\PakkelabelsBundle\Entity\LabelRepository
+        arguments:
+            - "@doctrine"
+            - "@knp_paginator"
+            - Loevgaard\PakkelabelsBundle\Entity\Label

@@ -2,7 +2,6 @@
 
 namespace Loevgaard\PakkelabelsBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
 use Loevgaard\PakkelabelsBundle\Entity\Label;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -26,23 +25,10 @@ class LabelController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $paginator = $this->get('knp_paginator');
+        $repos = $this->get('loevgaard_pakkelabels.label_repository');
 
-        /** @var EntityManager $em */
-        $em = $this->get('doctrine')->getManager();
-
-        $qb = $em->createQueryBuilder();
-        $qb->select('l')
-            ->from('LoevgaardPakkelabelsBundle:Label', 'l')
-            ->orderBy('l.id', 'desc')
-        ;
-
-        /** @var Label[] $labels */
-        $labels = $paginator->paginate(
-            $qb,
-            $request->query->getInt('page', 1),
-            100
-        );
+        /** @var Label[] $countryMappings */
+        $labels = $repos->findAllWithPaging($request->query->getInt('page', 1));
 
         return $this->render('@LoevgaardPakkelabels/label/index.html.twig', [
             'labels' => $labels,

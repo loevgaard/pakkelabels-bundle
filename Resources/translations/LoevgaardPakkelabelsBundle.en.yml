@@ -43,10 +43,9 @@ shipping_method_mapping:
         service_codes: Service codes
     new:
         heading: New shipping method mapping
-        created: The shipping method mapping has been created
     edit:
         heading: Edit shipping method mapping
-        updated: The shipping method mapping has been updated
+        saved: The shipping method mapping has been saved
 
 # Global strings
 layout:

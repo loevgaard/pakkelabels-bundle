@@ -17,7 +17,7 @@
         <tr>
             <td>{{ shippingMethodMapping.id }}</td>
             <td>{{ shippingMethodMapping.source }}</td>
-            <td>{{ 'shipping_method_mapping.index.maps_to'|trans }}</td>
+            <td><span class="glyphicon glyphicon-arrow-right"></span></td>
             <td>{{ shippingMethodMapping.productCode }}</td>
             <td>{{ shippingMethodMapping.serviceCodes ? shippingMethodMapping.serviceCodes|join(', ') : '' }}</td>
             <td nowrap>
@@ -28,3 +28,5 @@
         {% endfor %}
     </tbody>
 </table>
+
+{{ knp_pagination_render(shippingMethodMappings) }}
