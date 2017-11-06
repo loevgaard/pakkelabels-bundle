@@ -24,12 +24,12 @@ class ApiWrapperController extends Controller
     public function indexAction(Request $request)
     {
         $uri = $request->query->get('uri');
-        $params = $request->query->get('params') ? : [];
+        $params = $request->query->get('params') ?: [];
         $params = array_replace($params, ['per_page' => 200]);
 
         $client = $this->get('loevgaard_pakkelabels.client');
         $res = $client->doRequest('get', $uri, [
-            'query' => $params
+            'query' => $params,
         ]);
 
         return new JsonResponse($res);

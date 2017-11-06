@@ -3,8 +3,8 @@
 namespace Loevgaard\PakkelabelsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * This entity maps any (shipping method) string to a product code and optional service codes.
@@ -76,7 +76,7 @@ class ShippingMethodMapping
      *
      * @return ShippingMethodMapping
      */
-    public function setId(int $id) : self
+    public function setId(int $id): self
     {
         $this->id = $id;
 
@@ -96,7 +96,7 @@ class ShippingMethodMapping
      *
      * @return ShippingMethodMapping
      */
-    public function setSource(string $source) : self
+    public function setSource(string $source): self
     {
         $this->source = $source;
 
@@ -116,7 +116,7 @@ class ShippingMethodMapping
      *
      * @return ShippingMethodMapping
      */
-    public function setProductCode(string $productCode) : self
+    public function setProductCode(string $productCode): self
     {
         $this->productCode = $productCode;
 
@@ -136,7 +136,7 @@ class ShippingMethodMapping
      *
      * @return ShippingMethodMapping
      */
-    public function setServiceCodes(array $serviceCodes) : self
+    public function setServiceCodes(array $serviceCodes): self
     {
         $this->serviceCodes = $serviceCodes;
 
@@ -153,11 +153,13 @@ class ShippingMethodMapping
 
     /**
      * @param string $returnProductCode
+     *
      * @return ShippingMethodMapping
      */
-    public function setReturnProductCode(string $returnProductCode) : self
+    public function setReturnProductCode(string $returnProductCode): self
     {
         $this->returnProductCode = $returnProductCode;
+
         return $this;
     }
 
@@ -171,11 +173,13 @@ class ShippingMethodMapping
 
     /**
      * @param array $returnServiceCodes
+     *
      * @return ShippingMethodMapping
      */
-    public function setReturnServiceCodes(array $returnServiceCodes) : self
+    public function setReturnServiceCodes(array $returnServiceCodes): self
     {
         $this->returnServiceCodes = $returnServiceCodes;
+
         return $this;
     }
 }

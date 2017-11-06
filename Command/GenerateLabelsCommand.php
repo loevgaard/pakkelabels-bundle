@@ -43,7 +43,7 @@ class GenerateLabelsCommand extends ContainerAwareCommand
         $labels = $manager->getRepository('LoevgaardPakkelabelsBundle:Label')->findBy([
             'status' => Label::STATUS_PENDING_CREATION,
         ], [
-            'id' => 'asc'
+            'id' => 'asc',
         ], $limit);
 
         if ($output->isVerbose()) {

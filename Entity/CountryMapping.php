@@ -3,8 +3,8 @@
 namespace Loevgaard\PakkelabelsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * This entity maps any (country) string to an ISO 3166 Alpha 2 country code.
@@ -34,7 +34,7 @@ class CountryMapping
     protected $source;
 
     /**
-     * ISO3166 country code
+     * ISO3166 country code.
      *
      * @var string
      *

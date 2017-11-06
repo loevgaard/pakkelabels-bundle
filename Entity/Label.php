@@ -67,9 +67,9 @@ class Label
     protected $shippingMethod;
 
     /**
-     * This property indiciates whether this label is a return label or not
+     * This property indiciates whether this label is a return label or not.
      *
-     * @var boolean
+     * @var bool
      *
      * @Assert\NotNull()
      *
@@ -414,32 +414,32 @@ class Label
         $this->status = static::STATUS_PENDING_NORMALIZATION;
     }
 
-    public function isStatus(string $status) : bool
+    public function isStatus(string $status): bool
     {
         return $this->status === $status;
     }
 
-    public function isSuccess() : bool
+    public function isSuccess(): bool
     {
         return $this->isStatus(static::STATUS_SUCCESS);
     }
 
-    public function isError() : bool
+    public function isError(): bool
     {
         return $this->isStatus(static::STATUS_ERROR);
     }
 
-    public function getStatusTranslationKey() : string
+    public function getStatusTranslationKey(): string
     {
         return 'label.status.'.$this->status;
     }
 
     /**
-     * Returns the available label formats
+     * Returns the available label formats.
      *
      * @return array
      */
-    public static function getLabelFormats() : array
+    public static function getLabelFormats(): array
     {
         return [
             self::LABEL_FORMAT_10_X_19_PDF => self::LABEL_FORMAT_10_X_19_PDF,
@@ -563,11 +563,13 @@ class Label
 
     /**
      * @param bool $returnLabel
+     *
      * @return Label
      */
     public function setReturnLabel(bool $returnLabel)
     {
         $this->returnLabel = $returnLabel;
+
         return $this;
     }
 

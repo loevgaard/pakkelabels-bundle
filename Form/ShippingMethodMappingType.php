@@ -37,9 +37,10 @@ class ShippingMethodMappingType extends AbstractType
 
         $transformer = new CallbackTransformer(
             function ($serviceCodesAsArray) {
-                if(!is_array($serviceCodesAsArray)) {
+                if (!is_array($serviceCodesAsArray)) {
                     return '';
                 }
+
                 return join(', ', $serviceCodesAsArray);
             },
             function ($serviceCodesAsString) {
@@ -55,7 +56,7 @@ class ShippingMethodMappingType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ShippingMethodMapping::class,
-            'translation_domain' => 'LoevgaardPakkelabelsBundle'
+            'translation_domain' => 'LoevgaardPakkelabelsBundle',
         ]);
     }
 }

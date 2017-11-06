@@ -78,7 +78,7 @@ class ShippingMethodMappingController extends Controller
      * @Route("/{id}/edit", name="loevgaard_pakkelabels_shipping_method_mapping_edit")
      *
      * @param ShippingMethodMapping $shippingMethodMapping
-     * @param Request        $request
+     * @param Request               $request
      *
      * @return Response
      */
@@ -94,9 +94,9 @@ class ShippingMethodMappingController extends Controller
     }
 
     /**
-     * @param Form           $form
+     * @param Form                  $form
      * @param ShippingMethodMapping $shippingMethodMapping
-     * @param Request        $request
+     * @param Request               $request
      *
      * @return null|RedirectResponse
      */
@@ -126,7 +126,7 @@ class ShippingMethodMappingController extends Controller
 
     /**
      * @param ShippingMethodMapping $shippingMethodMapping
-     * @param Form           $form
+     * @param Form                  $form
      *
      * @return Response
      */
@@ -137,7 +137,7 @@ class ShippingMethodMappingController extends Controller
         return $this->render('@LoevgaardPakkelabels/shipping_method_mapping/edit.html.twig', [
             'shippingMethodMapping' => $shippingMethodMapping,
             'form' => $form->createView(),
-            'countryForm' => $countryForm->createView()
+            'countryForm' => $countryForm->createView(),
         ]);
     }
 

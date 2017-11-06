@@ -28,9 +28,8 @@ class LabelFileFactory
      *
      * @return LabelFile
      */
-    public function create(Label $label) : LabelFile
+    public function create(Label $label): LabelFile
     {
-
         $file = new LabelFile($this->labelDir.'/'.$label->getId().'.png', 'w+');
 
         return $file;
@@ -40,14 +39,15 @@ class LabelFileFactory
      * @todo This is a bit wrong. This should probably be a service of some sort instead of being called a 'factory'
      *
      * @param Label $label
-     * @param bool $verifyExistence
+     * @param bool  $verifyExistence
+     *
      * @return LabelFile
      */
-    public function read(Label $label, bool $verifyExistence = false) : LabelFile
+    public function read(Label $label, bool $verifyExistence = false): LabelFile
     {
         $labelFilePath = $this->labelDir.'/'.$label->getId().'.png';
 
-        if($verifyExistence && !file_exists($labelFilePath)) {
+        if ($verifyExistence && !file_exists($labelFilePath)) {
             $file = new LabelFile($labelFilePath, 'w+');
 
             $labelRes = $this->pakkelabelsClient->doRequest('get', '/shipments/'.$label->getExternalId().'/labels', [

@@ -18,8 +18,8 @@ class CountrySelectorType extends AbstractType
                 'label' => 'shipping_method_mapping.label.country',
                 'mapped' => false,
                 'preferred_choices' => [
-                    'DK'
-                ]
+                    'DK',
+                ],
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'layout.update',
@@ -31,7 +31,7 @@ class CountrySelectorType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ShippingMethodMapping::class,
-            'translation_domain' => 'LoevgaardPakkelabelsBundle'
+            'translation_domain' => 'LoevgaardPakkelabelsBundle',
         ]);
     }
 }

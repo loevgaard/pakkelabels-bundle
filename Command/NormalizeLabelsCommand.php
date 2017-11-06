@@ -96,8 +96,8 @@ class NormalizeLabelsCommand extends ContainerAwareCommand
                 $shippingMethodMapping = $this->shippingMethodMapping($label->getShippingMethod());
                 if ($shippingMethodMapping) {
                     // check if the label is a return label and check if the return product codes are set
-                    if($label->isReturnLabel()) {
-                        if(!$shippingMethodMapping->getReturnProductCode()) {
+                    if ($label->isReturnLabel()) {
+                        if (!$shippingMethodMapping->getReturnProductCode()) {
                             $output->writeln('Mapping of shipping method `'.$label->getShippingMethod().'` does not have a return product code, but the label is a return label. You need to edit the shipping method mapping and add a return product code.', OutputInterface::VERBOSITY_VERBOSE);
                             $label->markAsError('Mapping of shipping method `'.$label->getShippingMethod().'` does not have a return product code, but the label is a return label. You need to edit the shipping method mapping and add a return product code.');
                             $manager->flush();
