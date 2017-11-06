@@ -66,6 +66,17 @@ class Label
      */
     protected $shippingMethod;
 
+    /**
+     * This property indiciates whether this label is a return label or not
+     *
+     * @var boolean
+     *
+     * @Assert\NotNull()
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $returnLabel;
+
     /**************************
      * Pakkelabels properties *
      *************************/
@@ -331,6 +342,7 @@ class Label
         $this->smsNotification = false;
         $this->emailNotification = false;
         $this->automaticSelectServicePoint = true;
+        $this->returnLabel = false;
     }
 
     public function arrayForApi(): array
@@ -394,6 +406,32 @@ class Label
     {
         $this->error = null;
         $this->status = static::STATUS_SUCCESS;
+    }
+
+    public function resetStatus()
+    {
+        $this->error = null;
+        $this->status = static::STATUS_PENDING_NORMALIZATION;
+    }
+
+    public function isStatus(string $status) : bool
+    {
+        return $this->status === $status;
+    }
+
+    public function isSuccess() : bool
+    {
+        return $this->isStatus(static::STATUS_SUCCESS);
+    }
+
+    public function isError() : bool
+    {
+        return $this->isStatus(static::STATUS_ERROR);
+    }
+
+    public function getStatusTranslationKey() : string
+    {
+        return 'label.status.'.$this->status;
     }
 
     /**
@@ -512,6 +550,24 @@ class Label
     {
         $this->shippingMethod = $shippingMethod;
 
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReturnLabel(): bool
+    {
+        return $this->returnLabel;
+    }
+
+    /**
+     * @param bool $returnLabel
+     * @return Label
+     */
+    public function setReturnLabel(bool $returnLabel)
+    {
+        $this->returnLabel = $returnLabel;
         return $this;
     }
 

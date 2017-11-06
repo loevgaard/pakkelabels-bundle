@@ -95,9 +95,24 @@ class NormalizeLabelsCommand extends ContainerAwareCommand
             if ($label->getShippingMethod()) {
                 $shippingMethodMapping = $this->shippingMethodMapping($label->getShippingMethod());
                 if ($shippingMethodMapping) {
-                    $label->setProductCode($shippingMethodMapping->getProductCode());
-                    if (!empty($shippingMethodMapping->getServiceCodes())) {
-                        $label->setServiceCodes(join(',', $shippingMethodMapping->getServiceCodes()));
+                    // check if the label is a return label and check if the return product codes are set
+                    if($label->isReturnLabel()) {
+                        if(!$shippingMethodMapping->getReturnProductCode()) {
+                            $output->writeln('Mapping of shipping method `'.$label->getShippingMethod().'` does not have a return product code, but the label is a return label. You need to edit the shipping method mapping and add a return product code.', OutputInterface::VERBOSITY_VERBOSE);
+                            $label->markAsError('Mapping of shipping method `'.$label->getShippingMethod().'` does not have a return product code, but the label is a return label. You need to edit the shipping method mapping and add a return product code.');
+                            $manager->flush();
+                            continue;
+                        }
+
+                        $label->setProductCode($shippingMethodMapping->getReturnProductCode());
+                        if (!empty($shippingMethodMapping->getReturnServiceCodes())) {
+                            $label->setServiceCodes(join(',', $shippingMethodMapping->getReturnServiceCodes()));
+                        }
+                    } else {
+                        $label->setProductCode($shippingMethodMapping->getProductCode());
+                        if (!empty($shippingMethodMapping->getServiceCodes())) {
+                            $label->setServiceCodes(join(',', $shippingMethodMapping->getServiceCodes()));
+                        }
                     }
                 } else {
                     $output->writeln('Shipping method `'.$label->getShippingMethod().'` is not mapped. Map it manually.', OutputInterface::VERBOSITY_VERBOSE);
@@ -113,6 +128,8 @@ class NormalizeLabelsCommand extends ContainerAwareCommand
 
             $output->writeln('Label was normalized', OutputInterface::VERBOSITY_VERBOSE);
         }
+
+        return 0;
     }
 
     /**

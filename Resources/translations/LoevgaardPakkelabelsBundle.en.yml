@@ -1,10 +1,17 @@
 label:
+    status:
+        pending_normalization: Pending normalization
+        pending_creation: Pending creation
+        error: Error
+        success: Success
     index:
         heading: Labels
         id: Id
         order_id: Order id
         receiver_name: Receiver name
         show_label: Show label
+        status: Status
+        reset_status: Reset status
     show:
         heading: Label
 
@@ -32,6 +39,8 @@ shipping_method_mapping:
         source: Source
         product_code: Product code
         service_codes: Service codes (separate with comma)
+        return_product_code: Return product code
+        return_service_codes: Return service codes (separate with comma)
     show:
         heading: Shipping method mapping
     index:
@@ -40,6 +49,8 @@ shipping_method_mapping:
         source: Source
         product_code: Product code
         service_codes: Service codes
+        return_product_code: Return product code
+        return_service_codes: Return service codes
     new:
         heading: New shipping method mapping
     edit:

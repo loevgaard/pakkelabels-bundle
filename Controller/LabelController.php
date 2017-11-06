@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,7 +28,7 @@ class LabelController extends Controller
     {
         $repos = $this->get('loevgaard_pakkelabels.label_repository');
 
-        /** @var Label[] $countryMappings */
+        /** @var Label[] $labels */
         $labels = $repos->findAllWithPaging($request->query->getInt('page', 1));
 
         return $this->render('@LoevgaardPakkelabels/label/index.html.twig', [
@@ -63,8 +64,25 @@ class LabelController extends Controller
         $labelFactory = $this->get('loevgaard_pakkelabels.label_file_factory');
 
         // @todo remember to catch exception, maybe create a new exception class
-        $labelFile = $labelFactory->create($label, true);
+        $labelFile = $labelFactory->read($label, true);
 
         return new BinaryFileResponse($labelFile);
+    }
+
+    /**
+     * @Method("GET")
+     * @Route("/{id}/reset-status", name="loevgaard_pakkelabels_label_reset_status")
+     *
+     * @param Label $label
+     *
+     * @return RedirectResponse
+     */
+    public function resetStatusAction(Label $label): RedirectResponse
+    {
+        $labelRepository = $this->get('loevgaard_pakkelabels.label_repository');
+        $label->resetStatus();
+        $labelRepository->save($label);
+
+        return $this->redirectToRoute('loevgaard_pakkelabels_label_index');
     }
 }

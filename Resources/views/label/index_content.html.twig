@@ -8,20 +8,29 @@
             <th>{{ 'label.index.id'|trans }}</th>
             <th>{{ 'label.index.order_id'|trans }}</th>
             <th>{{ 'label.index.receiver_name'|trans }}</th>
+            <th>{{ 'label.index.status'|trans }}</th>
             <th>{{ 'layout.actions'|trans }}</th>
         </tr>
     </thead>
     <tbody>
         {% for label in labels %}
-        <tr>
-            <td>{{ label.id }}</td>
-            <td>{{ label.orderId }}</td>
-            <td>{{ label.receiverName }}</td>
-            <td nowrap>
-                <a class="btn btn-sm btn-default" href="{{ path('loevgaard_pakkelabels_label_show', {id: label.id}) }}"><span class="glyphicon glyphicon-eye-open"></span> {{ 'layout.show'|trans }}</a>
-                <a class="btn btn-sm btn-default" href="{{ path('loevgaard_pakkelabels_label_image', {id: label.id}) }}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> {{ 'label.index.show_label'|trans }}</a>
-            </td>
-        </tr>
+            {% set label_state = 'warning' %}
+            {% if label.isSuccess() %}
+                {% set label_state = 'success' %}
+            {% elseif label.isError() %}
+                {% set label_state = 'danger' %}
+            {% endif %}
+            <tr>
+                <td>{{ label.id }}</td>
+                <td>{{ label.orderId }}</td>
+                <td>{{ label.receiverName }}</td>
+                <td><span class="label label-{{ label_state }}" title="{{ label.getError() }}">{{ label.statusTranslationKey|trans }}</span></td>
+                <td nowrap>
+                    <a class="btn btn-sm btn-default" href="{{ path('loevgaard_pakkelabels_label_show', {id: label.id}) }}"><span class="glyphicon glyphicon-eye-open"></span> {{ 'layout.show'|trans }}</a>
+                    <a class="btn btn-sm btn-default" href="{{ path('loevgaard_pakkelabels_label_image', {id: label.id}) }}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> {{ 'label.index.show_label'|trans }}</a>
+                    <a class="btn btn-sm btn-default" href="{{ path('loevgaard_pakkelabels_label_reset_status', {id: label.id}) }}"><span class="glyphicon glyphicon-repeat"></span> {{ 'label.index.reset_status'|trans }}</a>
+                </td>
+            </tr>
         {% endfor %}
     </tbody>
 </table>

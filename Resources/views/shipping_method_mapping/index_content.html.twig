@@ -14,6 +14,8 @@
             <th>&nbsp;</th>
             <th>{{ 'shipping_method_mapping.index.product_code'|trans }}</th>
             <th>{{ 'shipping_method_mapping.index.service_codes'|trans }}</th>
+            <th>{{ 'shipping_method_mapping.index.return_product_code'|trans }}</th>
+            <th>{{ 'shipping_method_mapping.index.return_service_codes'|trans }}</th>
             <th>{{ 'layout.actions'|trans }}</th>
         </tr>
     </thead>
@@ -27,6 +29,14 @@
             <td>
                 {% if shippingMethodMapping.serviceCodes is not empty %}
                     {{ shippingMethodMapping.serviceCodes|join(', ') }}
+                {% else %}
+                    &nbsp;
+                {% endif %}
+            </td>
+            <td>{{ shippingMethodMapping.returnProductCode }}</td>
+            <td>
+                {% if shippingMethodMapping.returnServiceCodes is not empty %}
+                    {{ shippingMethodMapping.returnServiceCodes|join(', ') }}
                 {% else %}
                     &nbsp;
                 {% endif %}
