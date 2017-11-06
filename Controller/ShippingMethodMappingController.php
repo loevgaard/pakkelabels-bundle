@@ -3,6 +3,7 @@
 namespace Loevgaard\PakkelabelsBundle\Controller;
 
 use Loevgaard\PakkelabelsBundle\Entity\ShippingMethodMapping;
+use Loevgaard\PakkelabelsBundle\Form\CountryType;
 use Loevgaard\PakkelabelsBundle\Form\ShippingMethodMappingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -131,9 +132,12 @@ class ShippingMethodMappingController extends Controller
      */
     private function updateResponse(ShippingMethodMapping $shippingMethodMapping, Form $form): Response
     {
+        $countryForm = $this->getCountryForm();
+
         return $this->render('@LoevgaardPakkelabels/shipping_method_mapping/edit.html.twig', [
             'shippingMethodMapping' => $shippingMethodMapping,
             'form' => $form->createView(),
+            'countryForm' => $countryForm
         ]);
     }
 
@@ -145,5 +149,13 @@ class ShippingMethodMappingController extends Controller
     private function getForm(ShippingMethodMapping $shippingMethodMapping): Form
     {
         return $form = $this->createForm(ShippingMethodMappingType::class, $shippingMethodMapping);
+    }
+
+    /**
+     * @return Form
+     */
+    private function getCountryForm(): Form
+    {
+        return $form = $this->createForm(CountryType::class);
     }
 }

@@ -58,4 +58,5 @@ layout:
     edit: Edit
     save: Save
     create: Create
+    update: Update
     required: Required
