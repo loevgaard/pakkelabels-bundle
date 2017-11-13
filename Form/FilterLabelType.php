@@ -1,6 +1,7 @@
 <?php
 namespace Loevgaard\PakkelabelsBundle\Form;
 
+use Loevgaard\PakkelabelsBundle\Entity\Label;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,7 +17,8 @@ class FilterLabelType extends AbstractType
                 'label' => 'label.filter.order_id'
             ])
             ->add('status', Filters\ChoiceFilterType::class, [
-                'label' => 'label.filter.status'
+                'label' => 'label.filter.status',
+                'choices' => Label::getStatuses()
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'layout.filter'

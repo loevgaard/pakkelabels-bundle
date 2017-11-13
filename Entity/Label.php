@@ -449,6 +449,21 @@ class Label
         ];
     }
 
+    /**
+     * Returns the available statuses
+     *
+     * @return array
+     */
+    public static function getStatuses(): array
+    {
+        return [
+            self::STATUS_PENDING_NORMALIZATION => self::STATUS_PENDING_NORMALIZATION,
+            self::STATUS_PENDING_CREATION => self::STATUS_PENDING_CREATION,
+            self::STATUS_SUCCESS => self::STATUS_SUCCESS,
+            self::STATUS_ERROR => self::STATUS_ERROR,
+        ];
+    }
+
     /*********************
      * Getters / Setters *
      ********************/
