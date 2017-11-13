@@ -28,7 +28,7 @@ class LabelController extends Controller
     {
         $repos = $this->get('loevgaard_pakkelabels.label_repository');
 
-        $filterForm = $this->createForm('AppBundle\Form\FilterLabelType');
+        $filterForm = $this->createForm('Loevgaard\PakkelabelsBundle\Form\FilterLabelType');
 
         $qb = $repos->getQueryBuilder();
 

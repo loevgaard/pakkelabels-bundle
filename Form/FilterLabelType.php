@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Form;
+namespace Loevgaard\PakkelabelsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
