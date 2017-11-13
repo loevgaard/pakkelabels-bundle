@@ -17,6 +17,7 @@
         "doctrine/orm": "^2.5",
         "knplabs/knp-paginator-bundle": "^2.6",
         "league/iso3166": "^2.0",
+        "lexik/form-filter-bundle": "^5.0",
         "loevgaard/pakkelabels-php-sdk": "^1.0.0",
         "sensio/framework-extra-bundle": "^3.0",
         "symfony/form": "^3.2",

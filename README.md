@@ -36,6 +36,7 @@ class AppKernel extends Kernel
 
             new Loevgaard\PakkelabelsBundle\LoevgaardPakkelabelsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
         );
 
         // ...

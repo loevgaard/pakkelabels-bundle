@@ -14,6 +14,9 @@ label:
         reset_status: Reset status
     show:
         heading: Label
+    filter:
+        order_id: Order id
+        status: Status
 
 country_mapping:
     label:
@@ -71,3 +74,4 @@ layout:
     create: Create
     update: Update
     required: Required
+    filter: Filter

@@ -28,11 +28,24 @@ class LabelController extends Controller
     {
         $repos = $this->get('loevgaard_pakkelabels.label_repository');
 
+        $filterForm = $this->createForm('AppBundle\Form\FilterLabelType');
+
+        $qb = $repos->getQueryBuilder();
+
+        if ($request->query->has($filterForm->getName())) {
+            // manually bind values from the request
+            $filterForm->submit($request->query->get($filterForm->getName()));
+
+            // build the query from the given form object
+            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $qb);
+        }
+
         /** @var Label[] $labels */
-        $labels = $repos->findAllWithPaging($request->query->getInt('page', 1));
+        $labels = $repos->findAllWithPaging($request->query->getInt('page', 1), 100, [], $qb);
 
         return $this->render('@LoevgaardPakkelabels/label/index.html.twig', [
             'labels' => $labels,
+            'filterForm' => $filterForm
         ]);
     }
 

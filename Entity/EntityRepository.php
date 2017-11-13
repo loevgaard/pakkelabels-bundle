@@ -86,7 +86,7 @@ abstract class EntityRepository
     public function findAllWithPaging($page = 1, $itemsPerPage = 100, array $orderBy = [], QueryBuilder $qb = null): PaginationInterface
     {
         if (!$qb) {
-            $qb = $this->getQueryBuilder('e');
+            $qb = $this->getQueryBuilder();
         }
 
         foreach ($orderBy as $field => $direction) {
@@ -103,12 +103,10 @@ abstract class EntityRepository
     }
 
     /**
-     * @param string $alias
-     *
      * @return QueryBuilder
      */
-    public function getQueryBuilder(string $alias): QueryBuilder
+    public function getQueryBuilder(): QueryBuilder
     {
-        return $this->repository->createQueryBuilder($alias);
+        return $this->repository->createQueryBuilder('l');
     }
 }
