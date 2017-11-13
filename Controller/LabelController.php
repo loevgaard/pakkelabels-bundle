@@ -45,7 +45,7 @@ class LabelController extends Controller
 
         return $this->render('@LoevgaardPakkelabels/label/index.html.twig', [
             'labels' => $labels,
-            'filterForm' => $filterForm
+            'filterForm' => $filterForm->createView()
         ]);
     }
 
