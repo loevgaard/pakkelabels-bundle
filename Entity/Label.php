@@ -141,7 +141,7 @@ class Label
     protected $automaticSelectServicePoint;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -481,7 +481,7 @@ class Label
      *
      * @return Label
      */
-    public function setId(int $id)
+    public function setId(int $id) : Label
     {
         $this->id = $id;
 
@@ -501,7 +501,7 @@ class Label
      *
      * @return Label
      */
-    public function setExternalId(int $externalId)
+    public function setExternalId(int $externalId) : Label
     {
         $this->externalId = $externalId;
 
@@ -521,7 +521,7 @@ class Label
      *
      * @return Label
      */
-    public function setStatus(string $status)
+    public function setStatus(string $status) : Label
     {
         $this->status = $status;
 
@@ -541,7 +541,7 @@ class Label
      *
      * @return Label
      */
-    public function setError(string $error)
+    public function setError(string $error) : Label
     {
         $this->error = $error;
 
@@ -561,7 +561,7 @@ class Label
      *
      * @return Label
      */
-    public function setShippingMethod(string $shippingMethod)
+    public function setShippingMethod(string $shippingMethod) : Label
     {
         $this->shippingMethod = $shippingMethod;
 
@@ -581,7 +581,7 @@ class Label
      *
      * @return Label
      */
-    public function setReturnLabel(bool $returnLabel)
+    public function setReturnLabel(bool $returnLabel) : Label
     {
         $this->returnLabel = $returnLabel;
 
@@ -601,7 +601,7 @@ class Label
      *
      * @return Label
      */
-    public function setOrderId(string $orderId)
+    public function setOrderId(string $orderId) : Label
     {
         $this->orderId = $orderId;
 
@@ -621,7 +621,7 @@ class Label
      *
      * @return Label
      */
-    public function setReference(string $reference)
+    public function setReference(string $reference) : Label
     {
         $this->reference = $reference;
 
@@ -641,7 +641,7 @@ class Label
      *
      * @return Label
      */
-    public function setSource(string $source)
+    public function setSource(string $source) : Label
     {
         $this->source = $source;
 
@@ -661,7 +661,7 @@ class Label
      *
      * @return Label
      */
-    public function setOwnAgreement(bool $ownAgreement)
+    public function setOwnAgreement(bool $ownAgreement) : Label
     {
         $this->ownAgreement = $ownAgreement;
 
@@ -681,7 +681,7 @@ class Label
      *
      * @return Label
      */
-    public function setLabelFormat(string $labelFormat)
+    public function setLabelFormat(string $labelFormat) : Label
     {
         $this->labelFormat = $labelFormat;
 
@@ -701,7 +701,7 @@ class Label
      *
      * @return Label
      */
-    public function setProductCode(string $productCode)
+    public function setProductCode(string $productCode) : Label
     {
         $this->productCode = $productCode;
 
@@ -721,7 +721,7 @@ class Label
      *
      * @return Label
      */
-    public function setServiceCodes(string $serviceCodes)
+    public function setServiceCodes(string $serviceCodes) : Label
     {
         $this->serviceCodes = $serviceCodes;
 
@@ -741,7 +741,7 @@ class Label
      *
      * @return Label
      */
-    public function setAutomaticSelectServicePoint(bool $automaticSelectServicePoint)
+    public function setAutomaticSelectServicePoint(bool $automaticSelectServicePoint) : Label
     {
         $this->automaticSelectServicePoint = $automaticSelectServicePoint;
 
@@ -751,7 +751,7 @@ class Label
     /**
      * @return string
      */
-    public function getServicePointId(): string
+    public function getServicePointId(): ?string
     {
         return $this->servicePointId;
     }
@@ -761,7 +761,7 @@ class Label
      *
      * @return Label
      */
-    public function setServicePointId(string $servicePointId)
+    public function setServicePointId(string $servicePointId) : Label
     {
         $this->servicePointId = $servicePointId;
 
@@ -781,7 +781,7 @@ class Label
      *
      * @return Label
      */
-    public function setSmsNotification(bool $smsNotification)
+    public function setSmsNotification(bool $smsNotification) : Label
     {
         $this->smsNotification = $smsNotification;
 
@@ -801,7 +801,7 @@ class Label
      *
      * @return Label
      */
-    public function setEmailNotification(bool $emailNotification)
+    public function setEmailNotification(bool $emailNotification) : Label
     {
         $this->emailNotification = $emailNotification;
 
@@ -821,7 +821,7 @@ class Label
      *
      * @return Label
      */
-    public function setSenderName(string $senderName)
+    public function setSenderName(string $senderName) : Label
     {
         $this->senderName = $senderName;
 
@@ -841,7 +841,7 @@ class Label
      *
      * @return Label
      */
-    public function setSenderAddress1(string $senderAddress1)
+    public function setSenderAddress1(string $senderAddress1) : Label
     {
         $this->senderAddress1 = $senderAddress1;
 
@@ -861,7 +861,7 @@ class Label
      *
      * @return Label
      */
-    public function setSenderAddress2(string $senderAddress2)
+    public function setSenderAddress2(string $senderAddress2) : Label
     {
         $this->senderAddress2 = $senderAddress2;
 
@@ -881,7 +881,7 @@ class Label
      *
      * @return Label
      */
-    public function setSenderCountryCode(string $senderCountryCode)
+    public function setSenderCountryCode(string $senderCountryCode) : Label
     {
         $this->senderCountryCode = $senderCountryCode;
 
@@ -901,7 +901,7 @@ class Label
      *
      * @return Label
      */
-    public function setSenderZipCode(string $senderZipCode)
+    public function setSenderZipCode(string $senderZipCode) : Label
     {
         $this->senderZipCode = $senderZipCode;
 
@@ -921,7 +921,7 @@ class Label
      *
      * @return Label
      */
-    public function setSenderCity(string $senderCity)
+    public function setSenderCity(string $senderCity) : Label
     {
         $this->senderCity = $senderCity;
 
@@ -941,7 +941,7 @@ class Label
      *
      * @return Label
      */
-    public function setSenderAttention(string $senderAttention)
+    public function setSenderAttention(string $senderAttention) : Label
     {
         $this->senderAttention = $senderAttention;
 
@@ -961,7 +961,7 @@ class Label
      *
      * @return Label
      */
-    public function setSenderEmail(string $senderEmail)
+    public function setSenderEmail(string $senderEmail) : Label
     {
         $this->senderEmail = $senderEmail;
 
@@ -981,7 +981,7 @@ class Label
      *
      * @return Label
      */
-    public function setSenderTelephone(string $senderTelephone)
+    public function setSenderTelephone(string $senderTelephone) : Label
     {
         $this->senderTelephone = $senderTelephone;
 
@@ -1001,7 +1001,7 @@ class Label
      *
      * @return Label
      */
-    public function setSenderMobile(string $senderMobile)
+    public function setSenderMobile(string $senderMobile) : Label
     {
         $this->senderMobile = $senderMobile;
 
@@ -1021,7 +1021,7 @@ class Label
      *
      * @return Label
      */
-    public function setReceiverName(string $receiverName)
+    public function setReceiverName(string $receiverName) : Label
     {
         $this->receiverName = $receiverName;
 
@@ -1041,7 +1041,7 @@ class Label
      *
      * @return Label
      */
-    public function setReceiverAddress1(string $receiverAddress1)
+    public function setReceiverAddress1(string $receiverAddress1) : Label
     {
         $this->receiverAddress1 = $receiverAddress1;
 
@@ -1061,7 +1061,7 @@ class Label
      *
      * @return Label
      */
-    public function setReceiverAddress2(string $receiverAddress2)
+    public function setReceiverAddress2(string $receiverAddress2) : Label
     {
         $this->receiverAddress2 = $receiverAddress2;
 
@@ -1081,7 +1081,7 @@ class Label
      *
      * @return Label
      */
-    public function setReceiverCountryCode(string $receiverCountryCode)
+    public function setReceiverCountryCode(string $receiverCountryCode) : Label
     {
         $this->receiverCountryCode = $receiverCountryCode;
 
@@ -1101,7 +1101,7 @@ class Label
      *
      * @return Label
      */
-    public function setReceiverZipCode(string $receiverZipCode)
+    public function setReceiverZipCode(string $receiverZipCode) : Label
     {
         $this->receiverZipCode = $receiverZipCode;
 
@@ -1121,7 +1121,7 @@ class Label
      *
      * @return Label
      */
-    public function setReceiverCity(string $receiverCity)
+    public function setReceiverCity(string $receiverCity) : Label
     {
         $this->receiverCity = $receiverCity;
 
@@ -1141,7 +1141,7 @@ class Label
      *
      * @return Label
      */
-    public function setReceiverAttention(string $receiverAttention)
+    public function setReceiverAttention(string $receiverAttention) : Label
     {
         $this->receiverAttention = $receiverAttention;
 
@@ -1161,7 +1161,7 @@ class Label
      *
      * @return Label
      */
-    public function setReceiverEmail(string $receiverEmail)
+    public function setReceiverEmail(string $receiverEmail) : Label
     {
         $this->receiverEmail = $receiverEmail;
 
@@ -1181,7 +1181,7 @@ class Label
      *
      * @return Label
      */
-    public function setReceiverTelephone(string $receiverTelephone)
+    public function setReceiverTelephone(string $receiverTelephone) : Label
     {
         $this->receiverTelephone = $receiverTelephone;
 
@@ -1201,7 +1201,7 @@ class Label
      *
      * @return Label
      */
-    public function setReceiverMobile(string $receiverMobile)
+    public function setReceiverMobile(string $receiverMobile) : Label
     {
         $this->receiverMobile = $receiverMobile;
 
@@ -1221,7 +1221,7 @@ class Label
      *
      * @return Label
      */
-    public function setReceiverInstruction(string $receiverInstruction)
+    public function setReceiverInstruction(string $receiverInstruction) : Label
     {
         $this->receiverInstruction = $receiverInstruction;
 
