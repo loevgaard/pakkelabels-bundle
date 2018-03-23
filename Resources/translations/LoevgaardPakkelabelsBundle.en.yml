@@ -14,6 +14,19 @@ label:
         reset_status: Reset status
     show:
         heading: Label
+        order_id: Order id
+        status: Status
+        error: Error
+        product_code: Product code
+        service_codes: Service codes
+        automatic_select_service_point: Automatically select service point
+        service_point_id: Service point id
+        sms_notification: SMS notification
+        email_notification: Email notification
+        receiver:
+            heading: Receiver
+        sender:
+            heading: Receiver
     filter:
         order_id: Order id
         status: Status

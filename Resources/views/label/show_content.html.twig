@@ -1,3 +1,65 @@
 {% trans_default_domain 'LoevgaardPakkelabelsBundle' %}
 
 <h1>{{ 'label.show.heading'|trans }}</h1>
+
+<dl class="dl-horizontal">
+    <dt>{{ 'label.show.order_id'|trans }}</dt>
+    <dd>{{ label.orderId }}</dd>
+    <dt>{{ 'label.show.status'|trans }}</dt>
+    <dd>{{ label.statusTranslationKey|trans }}</dd>
+    {% if label.isError() %}
+        <dt>{{ 'label.show.error'|trans }}</dt>
+        <dd>{{ label.error }}</dd>
+    {% endif %}
+    <dt>{{ 'label.show.product_code'|trans }}</dt>
+    <dd>{{ label.productCode }}</dd>
+    <dt>{{ 'label.show.service_codes'|trans }}</dt>
+    <dd>{{ label.serviceCodes }}</dd>
+    <dt>{{ 'label.show.automatic_select_service_point'|trans }}</dt>
+    <dd>{{ label.automaticSelectServicePoint }}</dd>
+    {% if label.servicePointId %}
+        <dt>{{ 'label.show.service_point_id'|trans }}</dt>
+        <dd>{{ label.servicePointId }}</dd>
+    {% endif %}
+    <dt>{{ 'label.show.sms_notification'|trans }}</dt>
+    <dd>{{ label.smsNotification }}</dd>
+    <dt>{{ 'label.show.email_notification'|trans }}</dt>
+    <dd>{{ label.emailNotification }}</dd>
+</dl>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>{{ 'label.show.receiver.heading'|trans }}</h2>
+        {% if label.receiverName %}
+            <div>{{ label.receiverName }}</div>
+        {% endif %}
+        {% if label.receiverAttention %}
+            <div>{{ label.receiverAttention }}</div>
+        {% endif %}
+        <div>{{ label.receiverAddress1 }}</div>
+        {% if label.receiverAddress2 %}
+            <div>{{ label.receiverAddress2 }}</div>
+        {% endif %}
+        <div>{{ label.receiverZipCode }} {{ label.receiverCity }}</div>
+        <div>{{ label.receiverCountryCode }}</div>
+        <div><a href="mailto:{{ label.receiverEmail }}">{{ label.receiverEmail }}</a></div>
+        <div>{{ label.receiverMobile }}</div>
+    </div>
+    <div class="col-md-6">
+        <h2>{{ 'label.show.sender.heading'|trans }}</h2>
+        {% if label.senderName %}
+            <div>{{ label.senderName }}</div>
+        {% endif %}
+        {% if label.senderAttention %}
+            <div>{{ label.senderAttention }}</div>
+        {% endif %}
+        <div>{{ label.senderAddress1 }}</div>
+        {% if label.senderAddress2 %}
+            <div>{{ label.senderAddress2 }}</div>
+        {% endif %}
+        <div>{{ label.senderZipCode }} {{ label.senderCity }}</div>
+        <div>{{ label.senderCountryCode }}</div>
+        <div><a href="mailto:{{ label.senderEmail }}">{{ label.senderEmail }}</a></div>
+        <div>{{ label.senderMobile }}</div>
+    </div>
+</div>
